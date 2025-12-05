@@ -204,5 +204,9 @@ contract WizardGame is Ownable {
 
     function myXP() external view returns (uint256) {
         return xp[msg.sender];
-    }    
+    }
+
+    function myLevel() external view returns (uint256) {
+        return level[msg.sender];
+    }
 }
