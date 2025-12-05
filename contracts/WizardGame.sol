@@ -92,5 +92,19 @@ contract WizardGame is Ownable {
 
         wizardToken.transfer(to, amount);
         emit ManaWithdrawn(to, amount);
-    }    
+    }
+
+    // ========================================================
+    //                 INTERNAL HELPERS
+    // ========================================================
+
+    function _registerWizard(address user) internal {
+        if (!hasInteracted[user]) {
+            hasInteracted[user] = true;
+            totalUniqueWizards++;
+            wizards.push(user);
+            emit WizardRegistered(user);
+        }
+        interactionsCount[user]++;
+    }        
 }
