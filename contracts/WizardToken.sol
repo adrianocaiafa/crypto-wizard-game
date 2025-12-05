@@ -3,6 +3,7 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
+
 /// @title WizardToken (MANA)
 /// @notice ERC20 used as mana in the Wizard Game ecosystem.
 ///         Users can claim free initial tokens to start playing.
