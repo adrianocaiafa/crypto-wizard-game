@@ -47,7 +47,14 @@ contract WizardGame is Ownable {
         uint256 newXP,
         uint256 newLevel
     );
-    
+
+    event SpellCast(
+        address indexed from,
+        address indexed target,
+        uint256 manaSpent,
+        uint256 xpGained,
+        uint256 newLevel
+    );
     // ========================================================
     //                   CONSTRUCTOR
     // ========================================================
