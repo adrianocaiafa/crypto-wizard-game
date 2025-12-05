@@ -38,7 +38,8 @@ contract WizardGame is Ownable {
     // ========================================================
 
     event WizardRegistered(address indexed wizard);
-
+    event LevelUp(address indexed wizard, uint256 newLevel);
+    
     // ========================================================
     //                   CONSTRUCTOR
     // ========================================================
