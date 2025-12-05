@@ -145,4 +145,27 @@ contract WizardGame is Ownable {
 
         emit XPGained(msg.sender, manaAmount, gainedXP, xp[msg.sender], level[msg.sender]);
     }
+
+    /// @notice Cast a spell on another wizard
+    /// @dev Caller must approve this contract to spend MANA.
+    function castSpell(address target, uint256 manaAmount) external {
+        require(target != address(0), "Invalid target");
+        require(target != msg.sender, "Cannot target yourself");
+        require(manaAmount >= MIN_MANA_SPEND, "Mana too low");
+
+        _checkNFT(msg.sender);
+        _registerWizard(msg.sender);
+        _registerWizard(target);
+
+        wizardToken.transferFrom(msg.sender, address(this), manaAmount);
+
+        // mana → XP conversion
+        uint256 gainedXP = manaAmount * MANA_TO_XP_RATE / 1e18;
+        xp[msg.sender] += gainedXP;
+        spellsCast[msg.sender]++;
+
+        _handleLevelUp(msg.sender);
+
+        emit SpellCast(msg.sender, target, manaAmount, gainedXP, level[msg.sender]);
+    }    
 }
