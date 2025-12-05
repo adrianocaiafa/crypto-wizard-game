@@ -121,3 +121,28 @@ contract WizardGame is Ownable {
             emit LevelUp(user, newLevel);
         }
     }
+
+    // ========================================================
+    //                   CORE GAME ACTIONS
+    // ========================================================
+
+    /// @notice Spend MANA to gain XP directly (no target)
+    /// @dev Caller must approve WizardGame to spend MANA.
+    function spendManaForXP(uint256 manaAmount) external {
+        require(manaAmount >= MIN_MANA_SPEND, "Not enough mana");
+
+        _checkNFT(msg.sender);
+        _registerWizard(msg.sender);
+
+        // Pull MANA from user
+        wizardToken.transferFrom(msg.sender, address(this), manaAmount);
+
+        // Convert MANA → XP
+        uint256 gainedXP = manaAmount * MANA_TO_XP_RATE / 1e18;
+        xp[msg.sender] += gainedXP;
+
+        _handleLevelUp(msg.sender);
+
+        emit XPGained(msg.sender, manaAmount, gainedXP, xp[msg.sender], level[msg.sender]);
+    }
+}
