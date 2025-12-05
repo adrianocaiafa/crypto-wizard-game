@@ -113,4 +113,11 @@ contract WizardGame is Ownable {
             require(wizardCard.balanceOf(user) > 0, "Wizard NFT required");
         }
     }
-}
+    
+    function _handleLevelUp(address user) internal {
+        uint256 newLevel = xp[user] / XP_PER_LEVEL;
+        if (newLevel > level[user]) {
+            level[user] = newLevel;
+            emit LevelUp(user, newLevel);
+        }
+    }
