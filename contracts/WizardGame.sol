@@ -106,5 +106,11 @@ contract WizardGame is Ownable {
             emit WizardRegistered(user);
         }
         interactionsCount[user]++;
-    }        
+    } 
+
+   function _checkNFT(address user) internal view {
+        if (nftRequiredForActions && address(wizardCard) != address(0)) {
+            require(wizardCard.balanceOf(user) > 0, "Wizard NFT required");
+        }
+    }
 }
