@@ -57,6 +57,7 @@ contract WizardGame is Ownable {
     );
 
     event WizardCardSet(address indexed nft);
+    event NftRequirementUpdated(bool required);
     // ========================================================
     //                   CONSTRUCTOR
     // ========================================================
