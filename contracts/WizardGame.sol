@@ -196,5 +196,13 @@ contract WizardGame is Ownable {
                 }
             }
         }
+    }
+
+    // ========================================================
+    //                    VIEW HELPERS
+    // ========================================================
+
+    function myXP() external view returns (uint256) {
+        return xp[msg.sender];
     }    
 }
