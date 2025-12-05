@@ -55,6 +55,8 @@ contract WizardGame is Ownable {
         uint256 xpGained,
         uint256 newLevel
     );
+
+    event WizardCardSet(address indexed nft);
     // ========================================================
     //                   CONSTRUCTOR
     // ========================================================
