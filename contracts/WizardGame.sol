@@ -78,4 +78,10 @@ contract WizardGame is Ownable {
         wizardCard = IERC721(_nft);
         emit WizardCardSet(_nft);
     }
+
+    /// @notice Require or not require NFT ownership to perform game actions
+    function setNftRequiredForActions(bool required) external onlyOwner {
+        nftRequiredForActions = required;
+        emit NftRequirementUpdated(required);
+    }
 }
