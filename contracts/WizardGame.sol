@@ -59,7 +59,7 @@ contract WizardGame is Ownable {
     event WizardCardSet(address indexed nft);
     event NftRequirementUpdated(bool required);
     event ManaWithdrawn(address indexed to, uint256 amount);
-    
+
     // ========================================================
     //                   CONSTRUCTOR
     // ========================================================
@@ -67,5 +67,15 @@ contract WizardGame is Ownable {
     constructor(address _manaToken) Ownable(msg.sender) {
         require(_manaToken != address(0), "Invalid token address");
         wizardToken = IERC20(_manaToken);
+    }
+
+    // ========================================================
+    //               ADMIN (OWNER) FUNCTIONS
+    // ========================================================
+
+    /// @notice Set or update the WizardCard NFT contract
+    function setWizardCard(address _nft) external onlyOwner {
+        wizardCard = IERC721(_nft);
+        emit WizardCardSet(_nft);
     }
 }
