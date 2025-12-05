@@ -216,5 +216,10 @@ contract WizardGame is Ownable {
 
     function myInteractions() external view returns (uint256) {
         return interactionsCount[msg.sender];
-    }    
+    }
+
+    function hasWizardNFT(address user) external view returns (bool) {
+        if (address(wizardCard) == address(0)) return false;
+        return wizardCard.balanceOf(user) > 0;
+    }
 }
