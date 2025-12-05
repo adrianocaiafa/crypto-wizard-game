@@ -213,4 +213,8 @@ contract WizardGame is Ownable {
     function mySpellsCast() external view returns (uint256) {
         return spellsCast[msg.sender];
     }
+
+    function myInteractions() external view returns (uint256) {
+        return interactionsCount[msg.sender];
+    }    
 }
