@@ -84,4 +84,13 @@ contract WizardGame is Ownable {
         nftRequiredForActions = required;
         emit NftRequirementUpdated(required);
     }
+
+    /// @notice Withdraw accumulated MANA from this contract
+    function withdrawMana(address to, uint256 amount) external onlyOwner {
+        require(to != address(0), "Invalid address");
+        require(wizardToken.balanceOf(address(this)) >= amount, "Insufficient MANA");
+
+        wizardToken.transfer(to, amount);
+        emit ManaWithdrawn(to, amount);
+    }    
 }
