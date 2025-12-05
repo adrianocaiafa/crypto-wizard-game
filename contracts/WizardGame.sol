@@ -14,7 +14,25 @@ contract WizardGame is Ownable {
     // ========================================================
 
     IERC20 public immutable wizardToken;  // MANA token
+    IERC721 public wizardCard;            // optional NFT for future use
 
+    bool public nftRequiredForActions;    // if true → user must hold NFT
+
+    uint256 public totalUniqueWizards;
+    address[] internal wizards;
+
+    mapping(address => bool) public hasInteracted;
+    mapping(address => uint256) public interactionsCount;
+
+    mapping(address => uint256) public xp;
+    mapping(address => uint256) public level;
+    mapping(address => uint256) public spellsCast;
+
+    // XP and mana conversion rules
+    uint256 public constant XP_PER_LEVEL       = 100;
+    uint256 public constant MANA_TO_XP_RATE    = 1; // 1 MANA = 1 XP
+    uint256 public constant MIN_MANA_SPEND     = 1e18; // 1 MANA minimum
+    
     // ========================================================
     //                   CONSTRUCTOR
     // ========================================================
