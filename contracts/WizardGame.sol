@@ -32,7 +32,13 @@ contract WizardGame is Ownable {
     uint256 public constant XP_PER_LEVEL       = 100;
     uint256 public constant MANA_TO_XP_RATE    = 1; // 1 MANA = 1 XP
     uint256 public constant MIN_MANA_SPEND     = 1e18; // 1 MANA minimum
-    
+
+    // ========================================================
+    //                       EVENTS
+    // ========================================================
+
+    event WizardRegistered(address indexed wizard);
+
     // ========================================================
     //                   CONSTRUCTOR
     // ========================================================
