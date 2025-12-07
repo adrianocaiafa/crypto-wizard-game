@@ -14,4 +14,16 @@ contract WizardCardNFT is ERC721, Ownable {
 
     constructor() ERC721("Wizard Card", "WIZCARD") Ownable(msg.sender) {}
 
+    /// @notice Mint a wizard card NFT. One per wallet.
+    function mint() external returns (uint256) {
+        require(!hasMinted[msg.sender], "Already minted");
+
+        uint256 tokenId = _nextTokenId;
+        _nextTokenId++;
+
+        hasMinted[msg.sender] = true;
+        _safeMint(msg.sender, tokenId);
+
+        return tokenId;
+    }
 }
