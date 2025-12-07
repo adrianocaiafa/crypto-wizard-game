@@ -7,6 +7,10 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 /// @title WizardCardNFT
 /// @notice Simple ERC721 used as wizard identity / access pass in the WizardGame ecosystem.
 contract WizardCardNFT is ERC721, Ownable {
+    uint256 private _nextTokenId = 1;
+
+    // optional: one card per wallet
+    mapping(address => bool) public hasMinted;
 
     constructor() ERC721("Wizard Card", "WIZCARD") Ownable(msg.sender) {}
 
